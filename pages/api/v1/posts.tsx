@@ -1,11 +1,12 @@
-import { NextApiRequest, NextApiResponse, NextApiHandler } from "next";
+import {  NextApiHandler } from "next";
+import {getPosts} from '../../../libs/post';
 
 
-
-const PostsIndex: NextApiHandler = (req, res) => {
-
+const PostsIndex: NextApiHandler = async (req, res) => {
+  const posts = await getPosts('markdown');
+  console.log(posts);
   res.statusCode = 200;
-  res.json({ name: 'John Doe' })
+  res.json(JSON.stringify(posts))
 }
 
 export default PostsIndex;
