@@ -11,6 +11,7 @@ createConnection().then(async connection => {
                 return new Post({title:`Post ${n}`,content:`这是我的第${n}篇文章`})
             })
     );
+        console.log('seed 数据填充了');
     }
 
 }).catch(error => console.log(error));

@@ -26,7 +26,7 @@ var _Post = require("./entity/Post");
             posts = _context.sent;
 
             if (!(posts.length === 0)) {
-              _context.next = 6;
+              _context.next = 7;
               break;
             }
 
@@ -39,6 +39,9 @@ var _Post = require("./entity/Post");
             }));
 
           case 6:
+            console.log('seed 数据填充了');
+
+          case 7:
           case "end":
             return _context.stop();
         }
