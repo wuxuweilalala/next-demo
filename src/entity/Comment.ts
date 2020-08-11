@@ -12,9 +12,9 @@ export class Comment {
     postId:number;
     @Column('text')
     content:string;
-    @CreateDateColumn('time')
+    @CreateDateColumn()
     createdAt:Date;
-    @UpdateDateColumn('time')
+    @UpdateDateColumn()
     updatedAt:Date;
     @ManyToOne(type => User,user=>user.comments)
     user:User;
