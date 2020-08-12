@@ -4,6 +4,8 @@ import Link from 'next/link';
 import jpg from '../assets/1.jpg';
 import {GetServerSideProps, NextPage} from 'next';
 import {UAParser} from 'ua-parser-js';
+import { getConnection} from 'typeorm';
+import {getDatabaseConnection} from '../libs/getDatabaseConnection';
 
 type Props = {
     browser: {
@@ -17,7 +19,7 @@ const Home: NextPage<Props> = (props) => {
 
     return (
         <div className={styles.container}>
-            <h1>你的瀏覽器是{props.browser.name}</h1>
+            <h1>你的浏览器是{props.browser.name}</h1>
             <Link href="/posts/first_post"><a>xxx</a></Link>
             <img style={{width: '200px'}} src={jpg} alt=""/>
         </div>
@@ -27,6 +29,8 @@ const Home: NextPage<Props> = (props) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+    const connect = await getDatabaseConnection();
+    console.log('connect');
     const ua = context.req.headers['user-agent'];
     const result = new UAParser(ua).getResult();
     return {
