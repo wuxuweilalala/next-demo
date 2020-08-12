@@ -4,7 +4,6 @@ import {User} from './entity/User';
 import {Post} from './entity/Post';
 import {Comment} from './entity/Comment';
 
-
 createConnection().then(async connection => {
     const {manager} = connection;
     const u1 = new User();

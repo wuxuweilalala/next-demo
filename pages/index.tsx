@@ -4,8 +4,10 @@ import Link from 'next/link';
 import jpg from '../assets/1.jpg';
 import {GetServerSideProps, NextPage} from 'next';
 import {UAParser} from 'ua-parser-js';
-import { getConnection} from 'typeorm';
 import {getDatabaseConnection} from '../libs/getDatabaseConnection';
+import {Post} from '../src/entity/Post';
+import {User} from '../src/entity/User';
+import {Comment} from '../src/entity/Comment';
 
 type Props = {
     browser: {
@@ -29,8 +31,17 @@ const Home: NextPage<Props> = (props) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const connect = await getDatabaseConnection();
+    const connection = await getDatabaseConnection();
     console.log('connect');
+    const posts =await connection.manager.find(Post)
+    const users =await connection.manager.find(User)
+    const comments =await connection.manager.find(Comment)
+    console.log('posts');
+    console.log(posts);
+    console.log('users');
+    console.log(users);
+    console.log('comments');
+    console.log(comments);
     const ua = context.req.headers['user-agent'];
     const result = new UAParser(ua).getResult();
     return {
