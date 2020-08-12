@@ -8,22 +8,19 @@ import {getDatabaseConnection} from '../libs/getDatabaseConnection';
 import {Post} from '../src/entity/Post';
 import {User} from '../src/entity/User';
 import {Comment} from '../src/entity/Comment';
+import {useEffect, useState} from 'react';
 
 type Props = {
-    browser: {
-        name:string;
-        version:string;
-        major:string;
-    }
+    posts:Post[],
 }
 
 const Home: NextPage<Props> = (props) => {
-
+    const {posts} = props;
     return (
         <div className={styles.container}>
-            <h1>你的浏览器是{props.browser.name}</h1>
-            <Link href="/posts/first_post"><a>xxx</a></Link>
-            <img style={{width: '200px'}} src={jpg} alt=""/>
+            {posts.map((post)=>(
+                <div key={post.id}>{post.title}</div>
+            ))}
         </div>
     );
 };
@@ -36,17 +33,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const posts =await connection.manager.find(Post)
     const users =await connection.manager.find(User)
     const comments =await connection.manager.find(Comment)
-    console.log('posts');
-    console.log(posts);
-    console.log('users');
-    console.log(users);
-    console.log('comments');
-    console.log(comments);
-    const ua = context.req.headers['user-agent'];
-    const result = new UAParser(ua).getResult();
     return {
         props: {
-            browser: result.browser
+            posts: JSON.parse(JSON.stringify(posts))
         }
     };
 };
