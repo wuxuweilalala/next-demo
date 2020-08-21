@@ -14,11 +14,13 @@
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
+    "@types/lodash": "^4.14.159",
     "@types/md5": "^2.2.0",
     "@types/ua-parser-js": "^0.7.33",
     "axios": "^0.19.2",
     "concurrently": "^5.2.0",
     "gray-matter": "^4.0.2",
+    "lodash": "^4.17.20",
     "md5": "^2.3.0",
     "next": "9.5.1",
     "pg": "^8.3.0",
