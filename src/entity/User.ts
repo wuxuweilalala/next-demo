@@ -1,4 +1,5 @@
 import {
+    BeforeInsert,
     Column,
     CreateDateColumn,
     Entity,
@@ -10,6 +11,7 @@ import {
 import {Post} from './Post';
 import {Comment} from './Comment';
 import {getDatabaseConnection} from '../../libs/getDatabaseConnection';
+import md5 from 'md5';
 
 @Entity('users')
 export class User {
@@ -33,7 +35,7 @@ export class User {
     passwordConfirm: string;
 
     async validate() {
-        const found =await (await getDatabaseConnection()).manager.find(User, {username: this.username});
+        const found = await (await getDatabaseConnection()).manager.find(User, {username: this.username});
 
         if (found.length > 0) {
             this.errors.username.push('用户名已存在,不能重复注册');
@@ -57,7 +59,13 @@ export class User {
             this.errors.passwordConfirm.push('密码不匹配');
         }
     }
-    hasErrors(){
-        return  !!Object.values(this.errors).find(v => v.length > 0);
+
+    hasErrors() {
+        return !!Object.values(this.errors).find(v => v.length > 0);
+    }
+
+    @BeforeInsert()
+    generatePasswordDigest() {
+        this.passwordDigest = md5(this.password);
     }
 }

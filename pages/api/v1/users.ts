@@ -13,7 +13,6 @@ const PostsIndex: NextApiHandler = async (req, res) => {
     user.username = username.trim();
     user.password = password;
     user.passwordConfirm = passwordConfirm;
-    user.passwordDigest = md5(password);
 
     await user.validate();
 
