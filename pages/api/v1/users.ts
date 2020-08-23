@@ -1,7 +1,6 @@
 import {NextApiHandler} from 'next';
 import {getDatabaseConnection} from '../../../libs/getDatabaseConnection';
 import {User} from '../../../src/entity/User';
-import md5 from 'md5';
 
 const PostsIndex: NextApiHandler = async (req, res) => {
     const {username, password, passwordConfirm} = req.body;

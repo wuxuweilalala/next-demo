@@ -15,20 +15,18 @@ const SignUp: NextPage = () => {
         e.preventDefault();
         axios.post('/api/v1/users', signUpData).then(() => {
             alert('注册成功')
+            window.location.href = '/sign_in'
         }, (err) => {
             if (err.response) {
                 const response: AxiosResponse = err.response;
                 if (response.status === 422) {
-                    setErrors({...errors, ...response.data});
+                    setErrors(response.data);
                 }
             }
         });
-        console.log(signUpData);
     }, [signUpData]);
     return (
         <>
-            {JSON.stringify(signUpData)}
-            {JSON.stringify(errors)}
             <h1>注册</h1>
             <form onSubmit={onSubmit}>
                 <div>

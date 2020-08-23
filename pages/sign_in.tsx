@@ -5,31 +5,26 @@ import axios, {AxiosError, AxiosResponse} from 'axios';
 const SignUp: NextPage = () => {
     const [signUpData, setSignUpData] = useState({
         username: '',
-        password: '',
-        passwordConfirm: ''
+        password: ''
     });
     const [errors, setErrors] = useState({
-        username: [], password: [], passwordConfirm: []
+        username: [], password: [],
     });
     const onSubmit = useCallback((e) => {
         e.preventDefault();
-        axios.post('/api/v1/users', signUpData).then(() => {
-            alert('注册成功')
+        axios.post('/api/v1/sessions', signUpData).then(() => {
         }, (err) => {
             if (err.response) {
                 const response: AxiosResponse = err.response;
                 if (response.status === 422) {
-                    setErrors({...errors, ...response.data});
+                    setErrors(response.data);
                 }
             }
         });
-        console.log(signUpData);
     }, [signUpData]);
     return (
         <>
-            {JSON.stringify(signUpData)}
-            {JSON.stringify(errors)}
-            <h1>注册</h1>
+            <h1>登录</h1>
             <form onSubmit={onSubmit}>
                 <div>
                     <label>用户名
@@ -50,16 +45,7 @@ const SignUp: NextPage = () => {
                     </div>}
                 </div>
                 <div>
-                    <label>确认密码
-                        <input type="password"
-                               value={signUpData.passwordConfirm}
-                               onChange={e => setSignUpData({...signUpData, passwordConfirm: e.target.value})}/></label>
-                    {errors.passwordConfirm?.length > 0 && <div>
-                        {errors.passwordConfirm.join(',')}
-                    </div>}
-                </div>
-                <div>
-                    <button type="submit">注册</button>
+                    <button type="submit">登录</button>
                 </div>
             </form>
 
