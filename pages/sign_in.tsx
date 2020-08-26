@@ -2,7 +2,7 @@ import {NextPage} from 'next';
 import {useCallback, useState} from 'react';
 import axios, {AxiosError, AxiosResponse} from 'axios';
 
-const SignUp: NextPage = () => {
+const SignIn: NextPage = () => {
     const [signUpData, setSignUpData] = useState({
         username: '',
         password: ''
@@ -53,4 +53,4 @@ const SignUp: NextPage = () => {
     );
 };
 
-export default SignUp;
+export default SignIn;

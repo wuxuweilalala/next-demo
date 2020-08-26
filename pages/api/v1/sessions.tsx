@@ -1,24 +1,23 @@
 import {NextApiHandler} from 'next';
 import {SignIn} from '../../../src/model/SignIn';
+import withSession from '../../../libs/withSession';
 
 const Sessions: NextApiHandler = async (req, res) => {
     const {username, password} = req.body;
-    res.setHeader('Content-Type', 'application/json;charset=utf-8');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     const signIn = new SignIn();
     signIn.username = username;
     signIn.password = password;
-    console.log('signIn');
-    console.log(signIn);
     await signIn.validate();
-    if(signIn.hasErrors()){
+    if (signIn.hasErrors()) {
         res.statusCode = 422;
-        res.end(JSON.stringify(signIn.errors) );
-    }else {
+        res.end(JSON.stringify(signIn.errors));
+    } else {
+       // req.session.set('user', signIn.user);
+        //await req.session.save();
         res.statusCode = 200;
-        res.end(JSON.stringify(signIn.user) );
+        res.end(JSON.stringify(signIn.user));
     }
-
-
 };
 
-export default Sessions;
+export default withSession(Sessions);
