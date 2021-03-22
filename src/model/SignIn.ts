@@ -11,7 +11,7 @@ export class SignIn {
 
     async validate() {
         if (this.username.trim() === '') {
-            this.errors.username.push('请填写用户名');
+             this.errors.username.push('请填写用户名');
         }
          const connection = await getDatabaseConnection();
         const user = await connection.manager.findOne(User, {where: {username: this.username}});
