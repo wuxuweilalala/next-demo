@@ -13,7 +13,7 @@ export class SignIn {
         if (this.username.trim() === '') {
             this.errors.username.push('请填写用户名');
         }
-        const connection = await getDatabaseConnection();
+         const connection = await getDatabaseConnection();
         const user = await connection.manager.findOne(User, {where: {username: this.username}});
         this.user = user;
         if (user) {
