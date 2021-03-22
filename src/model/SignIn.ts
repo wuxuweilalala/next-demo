@@ -18,7 +18,7 @@ export class SignIn {
         this.user = user;
         if (user) {
             if (user.passwordDigest !== md5(this.password)) {
-                this.errors.password.push('密码与用户名不匹配');
+                 this.errors.password.push('密码与用户名不匹配');
             }
         } else {
             this.errors.username.push('用户名不存在');
