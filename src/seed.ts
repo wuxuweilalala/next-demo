@@ -8,8 +8,8 @@ createConnection().then(async connection => {
     const {manager} = connection;
     const u1 = new User();
     u1.username = 'wuxuwei';
-    u1.passwordDigest = '123456'
-    await manager.save(u1)
+      u1.passwordDigest = '123456'
+      await manager.save(u1)
 
     const p1 = new Post()
     p1.title='firt blog'
