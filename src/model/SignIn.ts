@@ -8,7 +8,6 @@ export class SignIn {
     user: User;
 
     errors = {username: [] as string[], password: [] as string[]};
-
     async validate() {
         if (this.username.trim() === '') {
             this.errors.username.push('请填写用户名');
@@ -23,9 +22,7 @@ export class SignIn {
         } else {
             this.errors.username.push('用户名不存在');
         }
-
     }
-
     hasErrors() {
         return !!Object.values(this.errors).find(v => v.length > 0);
     }
